@@ -34,11 +34,11 @@ View::View(unsigned int joystickIndex)
 
     {
         buttonHeader = sf::Text("Buttons", font, 36);
-        buttonHeader.setPosition(64, 120);
+        buttonHeader.setPosition(64, 90);
         unsigned int cols = 0;
         float width = 192.0f;
         float height = 64.0f;
-        float y = 200.0f;
+        float y = 150.0f;
         for (unsigned int i = 0; i < sf::Joystick::getButtonCount(joystickIndex); ++i)
         {
             float x = cols * width + 64;

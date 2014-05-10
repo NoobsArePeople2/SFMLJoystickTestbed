@@ -57,10 +57,10 @@ elseif os.is("linux") then
 
 end
 
-solution "SFML Joystick Testbed"
+solution "SFMLJoystickTestbed"
   configurations { "Debug", "Release" }
 
-  project "SFML Joystick Testbed"
+  project "SFMLJoystickTestbed"
     kind(KIND)
     language "C++"
     files { "**.h", "**.cpp", "**.hpp", "**.c", "**.ttf" }

@@ -2,7 +2,7 @@
 
 # Put us in the same folder as this script.
 cd "$(dirname "$0")"
-app_name="SFML_Gamepad_Test.app"
+app_name="SFMLJoystickTestbed.app"
 
 PROJ_ROOT=..
 
