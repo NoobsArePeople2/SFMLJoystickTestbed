@@ -19,9 +19,10 @@ class View : public sf::Drawable
 
 public:
 
-    View(unsigned int joystickIndex);
+    View();
     ~View();
 
+    void setJoystick(unsigned int joystickIndex);
     void update();
     virtual void draw (sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -29,14 +30,18 @@ protected:
 private:
 
     std::string axisToString(sf::Joystick::Axis axis);
+    void setIndicatorColor(sf::RectangleShape& rect, unsigned int index, bool connected);
 
     unsigned int joystickIndex;
+    bool joystickConnected;
 
     sf::Font font;
     sf::Text name;
     sf::Text vendorAndProduct;
 
     sf::RectangleShape titleSeparator;
+
+    sf::Text notConnectedLabel;
 
     sf::Text buttonHeader;
     std::vector<Button> buttons;
@@ -53,8 +58,8 @@ private:
     sf::RectangleShape metaSeparator;
 
     sf::Text controllerLabel;
-    std::vector<sf::RectangleShape> indicators;
     std::vector<sf::Text> indicatorLabels;
+    std::vector<sf::RectangleShape> indicators;
     sf::Text instructions;
 
 };
