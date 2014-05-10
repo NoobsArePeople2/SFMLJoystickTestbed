@@ -6,6 +6,8 @@ A testbed for Joysticks in [SFML](http://sfml-dev.org/).
 
 The testbed shows all the information about connected joysticks that SFML exposes. This includes the joystick name, vendor ID, product ID, buttons and axes.
 
+![screen shot](https://raw.githubusercontent.com/NoobsArePeople2/SFMLJoystickTestbed/master/sceen.png)
+
 Buttons are shown as rectangles that are gray when up (not pressed) and green when down (pressed). The label next to each square is the corresponding button index.
 
 Axes are shown as labels in the format `Axis Name: Axis Value`. "N/A" is displayed for the value if the axis is not available for a particular joystick.
