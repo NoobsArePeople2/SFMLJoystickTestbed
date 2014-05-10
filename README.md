@@ -2,6 +2,18 @@
 
 A testbed for Joysticks in [SFML](http://sfml-dev.org/).
 
+## Usage
+
+The testbed shows all the information about connected joysticks that SFML exposes. This includes the joystick name, vendor ID, product ID, buttons and axes.
+
+Buttons are shown as rectangles that are gray when up (not pressed) and green when down (pressed). The label next to each square is the corresponding button index.
+
+Axes are shown as labels in the format `Axis Name: Axis Value`. "N/A" is displayed for the value if the axis is not available for a particular joystick.
+
+The bottom of the window displays connected joysticks with a series of square indicators. The indicators are read from left to right with the leftmost indicator being index 0 with each subsequent indicator incrementing the index by 1.
+
+Blue is the currently selected joystick (if the joystick is also connected), green means the joystick is connected but not selected, white means the joystick is not connected and yellow means the joystick is selected but not connected. The testbed supports hotplugging so you can connect and disconnect joysticks with the testbed running.
+
 ## Dependencies
 
 - [SFML latest](https://github.com/LaurentGomila/SFML)
