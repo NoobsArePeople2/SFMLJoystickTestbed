@@ -21,7 +21,7 @@ View::View(unsigned int joystickIndex)
 
     {
         std::ostringstream stream;
-        stream << "Vendor ID: " << id.vendorId << "    Product ID: " << id.productId;
+        stream << "Vendor ID: " << id.vendorId << "    Product ID: " << id.productId;// << "    Index: " << joystickIndex;
         vendorAndProduct = sf::Text(stream.str(), font, 24);
         sf::FloatRect bounds = vendorAndProduct.getGlobalBounds();
         vendorAndProduct.setPosition((1024.0f - bounds.width) / 2.0f, 46);
@@ -37,7 +37,7 @@ View::View(unsigned int joystickIndex)
         buttonHeader.setPosition(64, 90);
         unsigned int cols = 0;
         float width = 192.0f;
-        float height = 64.0f;
+        float height = 48.0f;
         float y = 150.0f;
         for (unsigned int i = 0; i < sf::Joystick::getButtonCount(joystickIndex); ++i)
         {
@@ -106,6 +106,40 @@ View::View(unsigned int joystickIndex)
         metaSeparator.setPosition(0, 640);
     }
 
+    {
+        controllerLabel = sf::Text("Controllers. Gray: Disconnected. White: Connected. Blue: Current.", font, 18);
+        sf::FloatRect bounds = controllerLabel.getGlobalBounds();
+        controllerLabel.setPosition((1024.0f - bounds.width) / 2.0f, 660);
+
+        float size = 10.0f;
+        float padding = 8.0f;
+        float width = (size + padding) * sf::Joystick::Count;
+        float x = (1024.0f - width) / 2.0f;
+        for (unsigned int i = 0; i < sf::Joystick::Count; ++i)
+        {
+            sf::RectangleShape rect(sf::Vector2f(size, size));
+            rect.setPosition(x + (i * (size + padding)), 700);
+
+            if (sf::Joystick::isConnected(i))
+            {
+                if (i == joystickIndex)
+                {
+                    rect.setFillColor(sf::Color::Blue);
+                }
+                else
+                {
+                    rect.setFillColor(sf::Color::White);
+                }
+
+            }
+            else
+            {
+                rect.setFillColor(sf::Color(173, 173, 173));
+            }
+            indicators.push_back(rect);
+        }
+    }
+
 
 }
 
@@ -145,6 +179,26 @@ void View::update()
             axes[axis].setString(axisToString(axis) + ": N/A");
         }
     }
+
+    for (unsigned int i = 0; i < sf::Joystick::Count; ++i)
+    {
+        if (sf::Joystick::isConnected(i))
+        {
+            if (i == joystickIndex)
+            {
+                indicators.at(i).setFillColor(sf::Color::Blue);
+            }
+            else
+            {
+                indicators.at(i).setFillColor(sf::Color::White);
+            }
+
+        }
+        else
+        {
+            indicators.at(i).setFillColor(sf::Color(173, 173, 173));
+        }
+    }
 }
 
 
@@ -157,14 +211,14 @@ void View::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 
     target.draw(buttonHeader);
-    for (unsigned int i = 0; i < buttons.size(); ++i)
+    for (std::vector<Button>::const_iterator it = buttons.begin(); it != buttons.end(); ++it)
     {
-        target.draw(buttons.at(i));
+        target.draw(*it);
     }
 
-    for (unsigned int i = 0; i < buttonLabels.size(); ++i)
+    for (std::vector<sf::Text>::const_iterator it = buttonLabels.begin(); it != buttonLabels.end(); ++it)
     {
-        target.draw(buttonLabels.at(i));
+        target.draw(*it);
     }
     target.draw(buttonSeparator);
 
@@ -177,6 +231,13 @@ void View::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 
     target.draw(metaSeparator);
+
+    target.draw(controllerLabel);
+
+    for (std::vector<sf::RectangleShape>::const_iterator it = indicators.begin(); it != indicators.end(); ++it)
+    {
+        target.draw(*it);
+    }
 
 }
 

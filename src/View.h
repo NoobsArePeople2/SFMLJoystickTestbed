@@ -52,6 +52,11 @@ private:
 
     sf::RectangleShape metaSeparator;
 
+    sf::Text controllerLabel;
+    std::vector<sf::RectangleShape> indicators;
+    std::vector<sf::Text> indicatorLabels;
+    sf::Text instructions;
+
 };
 
 #endif // VIEW_H
