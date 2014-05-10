@@ -1,13 +1,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
-
-#include <vector>
 #include <string>
+#include <vector>
 
+#include "Button.h"
 #include "ResourcePath.h"
+#include "View.h"
 
 int main()
 {
@@ -35,6 +37,10 @@ int main()
         printf("Unable to load font!\n");
         return 1;
     }
+
+    View *view;
+    bool added = false;
+
 
     sf::Joystick::update();
     for (int i = 0; i < numPads; ++i)
@@ -64,6 +70,12 @@ int main()
         readout.push_back(dpad);
 
         gui.push_back(readout);
+
+        if (sf::Joystick::isConnected(i) && !added)
+        {
+            view = new View(i);
+            added = true;
+        }
     }
 
     while (win.isOpen())
@@ -81,6 +93,8 @@ int main()
                     win.close();
                 }
             }
+
+            view->update();
 
             // Update loop
             for (unsigned int i = 0; i < sf::Joystick::Count; ++i)
@@ -141,11 +155,13 @@ int main()
         win.clear(sf::Color(0, 0, 0));
         for (int j = 0; j < numPads; ++j)
         {
-            win.draw(gui.at(j).at(0));
-            win.draw(gui.at(j).at(1));
-            win.draw(gui.at(j).at(2));
-            win.draw(gui.at(j).at(3));
+            // win.draw(gui.at(j).at(0));
+            // win.draw(gui.at(j).at(1));
+            // win.draw(gui.at(j).at(2));
+            // win.draw(gui.at(j).at(3));
         }
+
+        view->draw(win, sf::RenderStates::Default);
 
         win.display();
         ticks = 0;

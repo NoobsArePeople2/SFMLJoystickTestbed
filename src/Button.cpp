@@ -1,0 +1,29 @@
+#include "Button.h"
+
+///////////////////////////////////////////////////////////
+Button::Button(const float x, const float y) :
+    sf::RectangleShape(sf::Vector2f(30.0f, 20.0f))
+{
+    setPosition(sf::Vector2f(x, y));
+    setUp();
+}
+
+
+///////////////////////////////////////////////////////////
+Button::~Button()
+{
+}
+
+
+///////////////////////////////////////////////////////////
+void Button::setDown()
+{
+    setFillColor(sf::Color::Green);
+}
+
+
+///////////////////////////////////////////////////////////
+void Button::setUp()
+{
+    setFillColor(sf::Color(173, 173, 173));
+}
