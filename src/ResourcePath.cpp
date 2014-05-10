@@ -48,6 +48,7 @@ std::string resourcePath(std::string file)
 
     CFStringGetCString( str, path, FILENAME_MAX, kCFStringEncodingASCII );
     CFRelease(str);
+    CFRelease(resourcesURL);
 
     std::string rpath(path);
 
