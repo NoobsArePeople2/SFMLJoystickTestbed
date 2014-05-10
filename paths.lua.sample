@@ -1,0 +1,6 @@
+-- Save this file as "paths.lua" in the same folder.
+-- Update these values to point to your SFML include and lib folders.
+SFML_INC = { "E:/absolute/path/to/SFML/headers" }
+SFML_LIB = { "E:/absolute/path/to/SFML/libs" }
+SFML_EXT_INC = { "E:/absolute/path/to/SFML/extlibs/headers" }
+SFML_EXT_LIB = { "E:/absolute/path/to/SFML/extlibs/libs" }
