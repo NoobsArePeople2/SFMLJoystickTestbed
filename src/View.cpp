@@ -15,7 +15,7 @@ View::View() :
     {
         notConnectedLabel = sf::Text("NOT CONNECTED\nConnect joystick to see info", font, 36);
         sf::FloatRect bounds = notConnectedLabel.getGlobalBounds();
-        notConnectedLabel.setPosition((1024.0f - bounds.width) / 2.0f, 340);
+        notConnectedLabel.setPosition((1024.0f - bounds.width) / 2.0f, 280);
     }
 
     {
@@ -147,7 +147,7 @@ void View::setJoystick(unsigned int joystickIndex)
         float labelX = 64.0f;
         float labelW = 240.0f;
         float labelY = 690.0f;
-        sf::Text currentLabel = sf::Text("Current", font, 18);
+        sf::Text currentLabel = sf::Text("Selected", font, 18);
         currentLabel.setColor(sf::Color::Blue);
         currentLabel.setPosition(labelX, labelY);
         indicatorLabels.push_back(currentLabel);
@@ -158,7 +158,7 @@ void View::setJoystick(unsigned int joystickIndex)
         indicatorLabels.push_back(connectedLabel);
 
         sf::Text disconnectedLabel = sf::Text("Disconnected", font, 18);
-        disconnectedLabel.setColor(sf::Color::White);
+        disconnectedLabel.setColor(sf::Color(173, 173, 173));
         disconnectedLabel.setPosition(labelX += labelW, labelY);
         indicatorLabels.push_back(disconnectedLabel);
 
